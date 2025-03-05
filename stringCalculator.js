@@ -8,7 +8,14 @@ function add(numbers) {
     numbers = parts[1]
   }
 
-  return numbers.split(delimiter).reduce((sum, num) => sum + parseInt(num), 0)
+  let nums = numbers.split(delimiter).map(Number)
+  let negatives = nums.filter((n) => n < 0)
+
+  if (negatives.length > 0) {
+    throw new Error(`Negative numbers not allowed: ${negatives.join(', ')}`)
+  }
+
+  return nums.reduce((sum, num) => sum + num, 0)
 }
 
 module.exports = add
